@@ -1,0 +1,305 @@
+
+.todo-list-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.12rem;
+}
+.todo-list-row .todo-item {
+  flex: 1 1 auto;
+}
+.todo-list-row .actions {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.todo-item .btn-edit {
+  background: #ffc107 !important;
+  color: #000 !important;
+  border: none !important;
+  border-radius: 6px !important;
+}
+.todo-item .btn-edit:hover {
+  background: #ffb300 !important;
+  color: #000 !important;
+}
+.todo-item .btn-delete {
+  background: #d32f2f !important;
+  color: #fff !important;
+  border: none !important;
+  border-radius: 6px !important;
+}
+.todo-item .btn-delete:hover {
+  background: #b71c1c !important;
+  color: #fff !important;
+}
+/* Make the Add button red with white text */
+.add-todo button[type="submit"] {
+  background: #d32f2f !important;
+  color: #fff !important;
+  border: none !important;
+}
+.add-todo button[type="submit"]:hover {
+  background: #b71c1c !important;
+  color: #fff !important;
+}
+
+.add-todo {
+  margin-bottom: 1.2rem;
+}
+
+.header-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 0 1.2rem 0;
+  margin: 0;
+}
+/* Header styling */
+header.site-header {
+  width: 100vw;
+  left: 0;
+  right: 0;
+  background: #fff3cd;
+  border-bottom: 2px solid #ffb300;
+  padding: 1.2rem 0.5rem 1.2rem 0.5rem;
+  margin-bottom: 2rem;
+  display: block;
+  position: relative;
+  box-shadow: 0 2px 8px #ffb30022;
+}
+.header-content {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+/* Header links styling */
+.header-link {
+  color: #ffb300;
+  font-weight: 600;
+  text-decoration: none;
+  margin-left: 1.2rem;
+  margin-right: 0;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: color 0.2s;
+  text-transform: uppercase;
+}
+.header-link:hover {
+  color: #b37b00;
+  text-decoration: underline;
+}
+#user-actions {
+  display: flex;
+  align-items: center;
+}
+/* Make all button text uppercase */
+button, .btn {
+  text-transform: uppercase !important;
+}
+body {
+  background: #FFF9F0;
+  color: #000;
+  font-family: 'Roboto', Arial, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.container {
+  background: #fff;
+  border-radius: 16px;
+  border: 3px solid #FFB300;
+  padding: 0;
+  max-width: 900px;
+  width: 95vw;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  box-sizing: border-box;
+}
+.container > header.site-header {
+  margin-bottom: 0;
+}
+.container > *:not(header.site-header) {
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
+  padding-top: 2rem;
+  padding-bottom: 0;
+}
+h1 {
+  text-align: center;
+  font-family: 'Oswald', Arial, sans-serif;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  font-size: 2.2rem;
+}
+h2 {
+  font-family: 'Oswald', Arial, sans-serif;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-top: 1.2rem;
+  margin-bottom: 0.7rem;
+}
+h3, h4, h5, h6 {
+  font-family: 'Roboto', Arial, sans-serif;
+  text-transform: uppercase;
+}
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+}
+.todo-list .todo-item {
+  margin-bottom: 0.7rem;
+}
+#user-management ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#user-management ul li {
+  margin-bottom: 0.7rem;
+  padding-left: 1.2rem;
+  text-indent: -1.2rem;
+}
+/* Restore original todo-item box style */
+/* Restore original todo-item box style, not bold */
+.todo-item {
+  display: flex;
+  align-items: center;
+  background: #FFF9F0;
+  border-radius: 6px;
+  padding: 0 0.75rem;
+  color: #000;
+  font-weight: normal;
+  border: 2px solid #FFB300;
+  transition: background 0.2s, color 0.2s;
+  height: 2.5rem;
+  min-height: 2.5rem;
+  max-height: 2.5rem;
+  line-height: 1.2;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+.todo-item:hover {
+  background: #FFE6A7;
+  color: #000;
+}
+.todo-text {
+  flex: 1;
+  font-size: 1.05rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+/* Restore original button style for actions */
+.actions button {
+  background: #ffc107;
+  border: none;
+  color: #000;
+  border-radius: 6px;
+  padding: 0.4rem 0.8rem;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  transition: background 0.2s, color 0.2s;
+}
+.actions button:hover {
+  background: #ffb300;
+  color: #000;
+}
+.add-todo {
+  display: flex;
+  gap: 0.5rem;
+}
+.add-todo input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid #FFB300;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #FFF9F0;
+  color: #22223B;
+  outline: none;
+  transition: border 0.2s;
+  height: 2.5rem;
+  box-sizing: border-box;
+}
+.add-todo input:focus {
+  border: 2px solid #FFB300;
+}
+/* Make all input fields on the page match the add-todo input */
+input[type="text"], input[type="password"], input[type="email"] {
+  height: 2.5rem;
+  border: 2px solid #FFB300;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #FFF9F0;
+  color: #22223B;
+  outline: none;
+  box-sizing: border-box;
+  padding: 0.5rem 0.75rem;
+  transition: border 0.2s;
+}
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus {
+  border: 2px solid #FFB300;
+}
+.add-todo button {
+  background: #00B8D9;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+.add-todo button:hover {
+  background: #FFB300;
+  color: #22223B;
+}
+@media (max-width: 900px) {
+  .container {
+    max-width: 700px;
+  }
+  .container > *:not(header.site-header) {
+    padding-left: 1.2rem;
+    padding-right: 1.2rem;
+    padding-top: 1.5rem;
+  }
+}
+@media (max-width: 700px) {
+  .container {
+    max-width: 500px;
+  }
+  .container > *:not(header.site-header) {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    padding-top: 1rem;
+  }
+}
+@media (max-width: 500px) {
+  .container {
+    max-width: 98vw;
+  }
+  .container > *:not(header.site-header) {
+    padding-left: 0.2rem;
+    padding-right: 0.2rem;
+    padding-top: 0.5rem;
+  }
+}

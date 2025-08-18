@@ -20,9 +20,10 @@
                 {% endif %}
                 
                 <div class="text-center">
-                    <button type="submit" class="btn btn-primary btn-lg px-5 me-3">
+                    <button type="submit" class="btn btn-primary btn-lg px-5 me-4 mb-3">
                         <i class="fas fa-sign-out-alt me-2"></i>Sign Out
                     </button>
+                    <br>
                     <a href="{% url 'dashboard' %}" class="btn btn-secondary btn-lg px-5">
                         <i class="fas fa-arrow-left me-2"></i>Cancel
                     </a>
@@ -56,6 +57,7 @@
         transition: all 0.3s ease;
         text-transform: uppercase;
         letter-spacing: 0.5px;
+        margin: 8px 0;
     }
 
     .btn-primary {
@@ -93,22 +95,22 @@
         .btn-lg {
             padding: 12px 25px;
             font-size: 14px;
-            margin: 5px;
+            margin: 10px 0;
+            width: 100%;
+            display: block;
         }
         
         .col-md-8 {
             padding: 0 15px;
         }
         
-        .btn.me-3 {
+        .btn.me-4 {
             margin-right: 0 !important;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
         
-        .text-center .btn {
-            display: block;
-            width: 100%;
-            margin: 5px 0;
+        br {
+            display: none;
         }
     }
 </style>

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Register - Minimal Productivity ToDo Manager{% endblock %}
+
+{% block header_links %}
+<a class="header-link" href="{% url 'index' %}">Home</a>
+<a class="header-link" href="{% url 'account_login' %}">Login</a>
+{% endblock %}
+
+{% block content %}
+<section id="register-form" style="margin-bottom: 2rem;">
+  <h2>Create Your Account</h2>
+  <form method="post" action="{% url 'account_signup' %}">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <button type="submit" class="btn btn-warning" style="width: 100%; margin-bottom: 1rem;">Create Account</button>
+  </form>
+  <div style="text-align: center; margin-top: 1rem;">
+    <p>Already have an account? <a href="{% url 'account_login' %}" class="header-link">Login here</a></p>
+  </div>
+</section>
+{% endblock %}

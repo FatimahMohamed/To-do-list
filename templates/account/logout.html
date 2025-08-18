@@ -24,7 +24,7 @@
                         <i class="fas fa-sign-out-alt me-2"></i>Sign Out
                     </button>
                     <br>
-                    <a href="{% url 'dashboard' %}" class="btn btn-secondary btn-lg px-5">
+                    <a href="{% url 'dashboard' %}" class="btn btn-secondary btn-lg px-5 btn-fixed-width">
                         <i class="fas fa-arrow-left me-2"></i>Cancel
                     </a>
                 </div>
@@ -58,6 +58,12 @@
         text-transform: uppercase;
         letter-spacing: 0.5px;
         margin: 8px 0;
+        min-width: 180px;
+    }
+
+    .btn-fixed-width {
+        width: 180px;
+        display: inline-block;
     }
 
     .btn-primary {
@@ -98,6 +104,11 @@
             margin: 10px 0;
             width: 100%;
             display: block;
+            min-width: unset;
+        }
+        
+        .btn-fixed-width {
+            width: 100%;
         }
         
         .col-md-8 {

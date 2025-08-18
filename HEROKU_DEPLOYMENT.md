@@ -30,10 +30,14 @@ heroku create your-todo-app-name
 
 ### 3. Set Environment Variables
 ```bash
-heroku config:set SECRET_KEY="+nea@5GP2&Z}&5_m{d$d+ds^b&kL?~"
+heroku config:set SECRET_KEY="your-secret-key-here"
 heroku config:set DEBUG="False"
-heroku config:set DATABASE_URL="postgresql://neondb_owner:npg_CINqkDu9GT3v@ep-fragrant-tree-a2jmd0h2.eu-central-1.aws.neon.tech/roast_dodge_robe_520026"
+heroku config:set DATABASE_URL="your-postgresql-connection-string"
 ```
+
+**⚠️ SECURITY NOTE**: Replace with your actual values:
+- `SECRET_KEY`: Generate a new Django secret key 
+- `DATABASE_URL`: Your PostgreSQL connection string from your database provider
 
 ### 4. Deploy Application
 ```bash
@@ -118,9 +122,15 @@ heroku run python manage.py createsuperuser
 ## 🔧 Configuration Details
 
 ### Environment Variables
-- `SECRET_KEY`: Django secret key for security
+- `SECRET_KEY`: Django secret key for security (generate a new one)
 - `DEBUG`: Set to "False" for production
-- `DATABASE_URL`: PostgreSQL connection string
+- `DATABASE_URL`: PostgreSQL connection string (keep private)
+
+**🔒 Security Best Practices:**
+- Never commit database credentials to git
+- Generate unique secret keys for each environment
+- Use environment variables for sensitive data
+- Rotate credentials regularly
 
 ### Static Files
 - Handled by WhiteNoise middleware

@@ -25,9 +25,18 @@ if "%APP_NAME%"=="" (
 
 echo.
 echo 🔧 Step 2: Setting environment variables...
-heroku config:set SECRET_KEY="+nea@5GP2&Z}&5_m{d$d+ds^b&kL?~"
+echo.
+echo ⚠️  IMPORTANT: You need to set these environment variables manually:
+echo    heroku config:set SECRET_KEY="your-secret-key"
+echo    heroku config:set DEBUG="False"  
+echo    heroku config:set DATABASE_URL="your-postgresql-url"
+echo.
+set /p SECRET_KEY="📋 Enter your SECRET_KEY: "
+set /p DATABASE_URL="📋 Enter your DATABASE_URL: "
+
+heroku config:set SECRET_KEY="%SECRET_KEY%"
 heroku config:set DEBUG="False"
-heroku config:set DATABASE_URL="postgresql://neondb_owner:npg_CINqkDu9GT3v@ep-fragrant-tree-a2jmd0h2.eu-central-1.aws.neon.tech/roast_dodge_robe_520026"
+heroku config:set DATABASE_URL="%DATABASE_URL%"
 
 echo.
 echo 📦 Step 3: Deploying to Heroku...

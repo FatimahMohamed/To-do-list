@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Minimal Productivity ToDo Manager{% endblock %}
+
+{% block content %}
+<!-- Welcome Message -->
+<section id="user-welcome" style="margin-bottom: 2rem;">
+  <h2>Welcome back, {{ user.first_name|default:user.username }}!</h2>
+  <p style="margin: 0; color: #666;">Ready to tackle your tasks today?</p>
+</section>
+
+<!-- Task Management -->
+<section id="task-management">
+  <h2>ADD A TASK</h2>
+  <form class="add-todo" method="post" action="{% url 'add_task' %}">
+    {% csrf_token %}
+    <input type="text" name="task_title" id="new-todo" placeholder="Add a new task..." required>
+    <button type="submit" class="btn btn-warning">Add</button>
+  </form>
+  
+  <h2 style="margin-top:2rem; margin-bottom:0.7rem;">YOUR TASKS</h2>
+  <ul class="todo-list" id="todo-list">
+    {% for task in tasks %}
+    <li class="todo-list-row" data-task-id="{{ task.id }}" {% if task.completed %}style="opacity: 0.7;"{% endif %}>
+      <div class="todo-item">
+        <span class="todo-text" {% if task.completed %}style="text-decoration: line-through; opacity: 0.6;"{% endif %}>{{ task.title }}</span>
+      </div>
+      <div class="actions">
+        <input type="checkbox" title="Mark complete" {% if task.completed %}checked{% endif %} onchange="toggleComplete(this, '{{ task.id }}')">
+        <button class="btn btn-edit btn-sm ms-1" onclick="editTask(this, '{{ task.id }}')">Edit</button>
+        <button class="btn btn-delete btn-sm ms-1" onclick="deleteTask('{{ task.id }}')">Delete</button>
+      </div>
+    </li>
+    {% empty %}
+    <li class="todo-list-row" id="empty-message">
+      <div class="todo-item" style="text-align: center; font-style: italic; color: #666;">
+        No tasks yet. Add your first task above!
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  
+  <!-- Task Statistics -->
+  <div style="margin-top: 2rem; text-align: center;">
+    <div class="todo-item" style="height: auto !important; min-height: auto !important; max-height: none !important; padding: 1rem 0.75rem; display: inline-block; margin: 0 auto;">
+      <strong>Task Summary:</strong> 
+      <span id="total-tasks">{{ total_tasks }}</span> total, 
+      <span id="completed-tasks">{{ completed_tasks }}</span> completed, 
+      <span id="remaining-tasks">{{ remaining_tasks }}</span> remaining
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function toggleComplete(checkbox, taskId) {
+  const todoItem = checkbox.closest('.todo-list-row');
+  const text = todoItem.querySelector('.todo-text');
+  
+  fetch(`/toggle-task/${taskId}/`, {
+    method: 'POST',
+    headers: {
+      'X-CSRFToken': getCsrfToken(),
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      'completed': checkbox.checked
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    if (data.success) {
+      if (checkbox.checked) {
+        text.style.textDecoration = 'line-through';
+        text.style.opacity = '0.6';
+        todoItem.style.opacity = '0.7';
+      } else {
+        text.style.textDecoration = '';
+        text.style.opacity = '1';
+        todoItem.style.opacity = '1';
+      }
+      updateTaskStats();
+    }
+  });
+}
+
+function editTask(btn, taskId) {
+  const textSpan = btn.closest('.todo-list-row').querySelector('.todo-text');
+  const current = textSpan.textContent;
+  const newTask = prompt('Edit task:', current);
+  if (newTask !== null && newTask.trim() !== '') {
+    fetch(`/edit-task/${taskId}/`, {
+      method: 'POST',
+      headers: {
+        'X-CSRFToken': getCsrfToken(),
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        'title': newTask.trim()
+      })
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        textSpan.textContent = newTask.trim();
+      }
+    });
+  }
+}
+
+function deleteTask(taskId) {
+  if (confirm('Are you sure you want to delete this task?')) {
+    fetch(`/delete-task/${taskId}/`, {
+      method: 'DELETE',
+      headers: {
+        'X-CSRFToken': getCsrfToken(),
+        'Content-Type': 'application/json',
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        document.querySelector(`[data-task-id="${taskId}"]`).remove();
+        updateTaskStats();
+        
+        // Show empty message if no tasks left
+        if (document.querySelectorAll('.todo-list-row').length === 0) {
+          document.getElementById('todo-list').innerHTML = `
+            <li class="todo-list-row" id="empty-message">
+              <div class="todo-item" style="text-align: center; font-style: italic; color: #666;">
+                No tasks yet. Add your first task above!
+              </div>
+            </li>
+          `;
+        }
+      }
+    });
+  }
+}
+
+function getCsrfToken() {
+  return document.querySelector('[name=csrfmiddlewaretoken]').value;
+}
+
+function updateTaskStats() {
+  const allTasks = document.querySelectorAll('.todo-list-row:not(#empty-message)');
+  const completedTasks = document.querySelectorAll('.todo-list-row:not(#empty-message) input[type="checkbox"]:checked');
+  const total = allTasks.length;
+  const completed = completedTasks.length;
+  const remaining = total - completed;
+
+  document.getElementById('total-tasks').textContent = total;
+  document.getElementById('completed-tasks').textContent = completed;
+  document.getElementById('remaining-tasks').textContent = remaining;
+}
+</script>
+{% endblock %}

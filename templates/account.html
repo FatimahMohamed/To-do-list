@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Account - Minimal Productivity ToDo Manager{% endblock %}
+
+{% block content %}
+<!-- Account Information Section -->
+<section id="account-info" style="margin-bottom: 2rem;">
+  <h2>Account Information</h2>
+  <div class="todo-item" style="margin-bottom: 1rem; height: auto !important; min-height: auto !important; max-height: none !important; padding: 1.5rem 0.75rem; color: #000 !important; line-height: 1.6;">
+    <div style="color: #000 !important;">
+      <strong style="color: #000 !important;">Username:</strong> <span style="color: #000 !important;">{{ user.username }}</span><br>
+      <strong style="color: #000 !important;">Email:</strong> <span style="color: #000 !important;">{{ user.email }}</span><br>
+      <strong style="color: #000 !important;">Member since:</strong> <span style="color: #000 !important;">{{ user.date_joined|date:"F Y" }}</span><br>
+      <strong style="color: #000 !important;">Total tasks:</strong> <span style="color: #000 !important;">{{ total_tasks }}</span>
+    </div>
+  </div>
+</section>
+
+<!-- Task Statistics -->
+<section id="task-stats" style="margin-bottom: 2rem;">
+  <h2>Your Activity</h2>
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+    <div class="todo-item" style="height: auto !important; min-height: auto !important; max-height: none !important; padding: 1.5rem 0.75rem; text-align: center; color: #000 !important;">
+      <h3 style="margin-bottom: 0.5rem; font-size: 1.5rem; color: #000 !important;">{{ completed_tasks }}</h3>
+      <p style="margin: 0; font-size: 0.95rem; color: #000 !important;">Tasks Completed</p>
+    </div>
+    <div class="todo-item" style="height: auto !important; min-height: auto !important; max-height: none !important; padding: 1.5rem 0.75rem; text-align: center; color: #000 !important;">
+      <h3 style="margin-bottom: 0.5rem; font-size: 1.5rem; color: #000 !important;">{{ pending_tasks }}</h3>
+      <p style="margin: 0; font-size: 0.95rem; color: #000 !important;">Tasks Pending</p>
+    </div>
+  </div>
+</section>
+
+<!-- Quick Actions -->
+<section id="quick-actions" style="margin-bottom: 2rem;">
+  <h2>Quick Actions</h2>
+  <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+    <a href="{% url 'dashboard' %}" class="btn btn-warning">Back to Dashboard</a>
+    <a href="{% url 'account_logout' %}" class="btn btn-secondary">Logout</a>
+  </div>
+</section>
+
+<!-- Danger Zone -->
+<section id="danger-zone" style="margin-bottom: 2rem;">
+  <h2 style="color: #d32f2f;">Account Settings</h2>
+  <div class="todo-item" style="border-color: #d32f2f; background: #ffebee; margin-bottom: 1rem; height: auto !important; min-height: auto !important; max-height: none !important; padding: 1.5rem 0.75rem; color: #000 !important; line-height: 1.6;">
+    <div style="color: #000 !important;">
+      <strong style="color: #000 !important;">Need to make changes?</strong> <span style="color: #000 !important;">You can manage your account settings through Django's built-in user management.</span><br>
+      <p style="margin-top: 1rem; color: #000 !important;">
+        For security reasons, account modifications are handled through the admin interface. 
+        Contact support if you need assistance with account changes.
+      </p>
+    </div>
+  </div>
+</section>
+{% endblock %}
